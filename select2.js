@@ -708,8 +708,12 @@ the specific language governing permissions and limitations under the Apache Lic
                     .addClass("select2-hidden-accessible")
                     .appendTo(document.body);
             }
-
-            this.containerId="s2id_"+(opts.element.attr("id") || "autogen"+nextUid());
+            if (opts.element.attr("id")) {
+                this.containerId = opts.element.attr("id")
+                opts.element[0].setAttribute("id", opts.element.attr("id")+"_")
+            } else {
+                this.containerId = "s2id_" + ("autogen" + nextUid());
+            };
             this.containerEventName= this.containerId
                 .replace(/([.])/g, '_')
                 .replace(/([;&,\-\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1');
